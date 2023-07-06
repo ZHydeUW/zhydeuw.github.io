@@ -1,7 +1,6 @@
 # Seattle Sounders
 ![](https://blogger.googleusercontent.com/img/a/AVvXsEhVfF-661NvCiWV4uCUhZrZLZ_e5FgSQU5QSUqP--vECHt-9-E9LbxaWj3ZZuZ2Z2EUbJpgWSIX5kPUoPOW0fiv_SB1Aq9tsB02p5q7m4vknsmeOhgM6V6UQtbA8Fyb3vgcLFsLO4Dd6caY3EJ4-54LBtwDhuP7UR_kWK4htbPD9-oTAw1o26RUDuutLg=s1000)
 
-A short description / abstract of the topic you choose. For the text here and below, feel free to use **bold** and *italic* fonts, [linked texts](url),  ![images](url), or any other element you think would be helpful for your audience to understand the topic.
 
 The Seattle Sounders have been around since 1974 across several different leagues. They started as a [NASL](https://en.wikipedia.org/wiki/North_American_Soccer_League_(1968%E2%80%931984)) team until is league disolved. Then in **2009**, they played their first game in MLS.
 
