@@ -37,5 +37,9 @@
   <ul>
     <li><a href="https://docs.mapbox.com/mapbox-gl-js/api/">Mapbox GL JS</a>: A JavaScript library for interactive, customizable maps.</li>
   </ul>
+
+  <h2>Sources</h2>
+  <p>The `uk.geojson` file used in this project was obtained from [Kaggle](https://www.kaggle.com/datasets/dorianlazar/uk-regions-geojson?resource=download).</p>
+  <p>The `battles.geojson` file used in this project was created with the assistance of ChatGPT.</p>
 </body>
 </html>
