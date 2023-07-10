@@ -38,3 +38,5 @@
   <ul>
     <li><a href="https://docs.mapbox.com/mapbox-gl-js/api/">Mapbox GL JS</a>: A JavaScript library for interactive, customizable maps.</li>
   </ul>
+</body>
+</html>
