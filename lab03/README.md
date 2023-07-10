@@ -8,6 +8,9 @@
 <body>
   <h1>Battles that helped form the UK</h1>
 
+  <h2>Summary</h2>
+  <p>This project showcases a map visualizing the locations of battles that played a significant role in the formation of the United Kingdom from the year 937 AD to 1805 AD. The map includes markers representing the battle locations, color-coded with blue circles.</p>
+
   <h2>Getting Started</h2>
   <p>To use this project, follow the instructions below:</p>
   <ol>
@@ -40,6 +43,4 @@
 
   <h2>Sources</h2>
   <p>The `uk.geojson` file used in this project was obtained from [Kaggle](https://www.kaggle.com/datasets/dorianlazar/uk-regions-geojson?resource=download).</p>
-  <p>The `battles.geojson` file used in this project was created with the assistance of ChatGPT.</p>
-</body>
-</html>
+  <p>The `
