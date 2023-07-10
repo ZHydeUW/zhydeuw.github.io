@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <title>Battles that helped form the UK</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.css" rel="stylesheet">
+  <style>
+  body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    overflow: hidden; /* Prevent scrolling on body */
+  }
+
+  #map-container {
+    flex-grow: 1;
+    position: relative;
+    overflow: hidden; /* Hide any overflowing content */
+  }
+
+  #map {
+    width: 100%;
+    height: 100vh;
+  }
+
+  #side-panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 450px;
+    height: 100vh;
+    background-color: white;
+    overflow-y: auto; /* Enable scrolling if needed */
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  button {
+    margin-bottom: 10px;
+  }
+
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+  }
+
+  th,
+  td {
+    text-align: left;
+    padding: 16px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  /* Hide side-panel when screen width is 1023px or smaller */
+  @media screen and (max-width: 1023px) {
+    #side-panel {
+      display: none;
+    }
+  }
+  </style>
+</head>
+
+<body>
+  <div id="map-container">
+    <div id="map"></div>
+  </div>
+  <div id="side-panel">
+    <h2>Battles that helped form the UK</h2>
+    <button id="sort-button">Sort by Year</button>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Year</th>
+        <th>Event</th>
+        <th>Achievement</th>
+      </tr>
+    </table>
+  </div>
+
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.js"></script>
+  <script>
+    mapboxgl.accessToken = 'pk.eyJ1Ijoiemh5ZGUiLCJhIjoiY2xqeDdhem92MWxtNzNqdGhtdHZoaHRodCJ9.0IzhakT-HMcx1FysIMPqBg';
+
+    async function geojsonFetch() {
+      let response, battles, uk, table;
+      response = await fetch('assets/battles.geojson');
+      battles = await response.json();
+      response = await fetch('assets/uk.geojson');
+      uk = await response.json();
+
+      let map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        zoom: 5.5,
+        center: [-2.9785, 54.9036] // Updated coordinates for the UK
+      });
+
+      map.on('load', function () {
+        map.addSource('battles', {
+          type: 'geojson',
+          data: battles
+        });
+
+        map.addLayer({
+          id: 'battles-layer',
+          type: 'circle',
+          source: 'battles',
+          paint: {
+            'circle-radius': 8,
+            'circle-stroke-width': 2,
+            'circle-color': 'blue',
+            'circle-stroke-color': 'white'
+          }
+        });
+
+        map.addSource('uk', {
+          type: 'geojson',
+          data: uk
+        });
+
+        map.addLayer({
+          id: 'uk-layer',
+          type: 'fill',
+          source: 'uk',
+          paint: {
+            'fill-color': '#0080ff',
+            'fill-opacity': 0.5
+          }
+        });
+      });
+
+      table = document.querySelector('table');
+      let rows = [];
+      battles.features.forEach((feature, index) => {
+        rows.push({
+          id: index + 1,
+          year: feature.properties.year,
+          event: feature.properties.event,
+          achievement: feature.properties.achievement,
+          coordinates: feature.geometry.coordinates
+        });
+      });
+
+      displayTable(rows);
+
+      document.querySelector('#sort-button').addEventListener('click', sortTable);
+
+      function sortTable() {
+        rows.sort((a, b) => a.year - b.year);
+        displayTable(rows);
+      }
+
+      function displayTable(rows) {
+        table.innerHTML = `
+          <tr>
+            <th>ID</th>
+            <th>Year</th>
+            <th>Event</th>
+            <th>Achievement</th>
+          </tr>
+        `;
+
+        rows.forEach((row) => {
+          table.innerHTML += `
+            <tr>
+              <td>${row.id}</td>
+              <td>${row.year}</td>
+              <td>${row.event}</td>
+              <td>${row.achievement}</td>
+            </tr>
+          `;
+        });
+      }
+    }
+
+    geojsonFetch();
+  </script>
+</body>
+</html>
